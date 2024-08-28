@@ -16,6 +16,8 @@ knitr::opts_chunk$set(
 # regmonkey
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/GohUnTsuan/regmonkey/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/GohUnTsuan/regmonkey/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/GohUnTsuan/regmonkey/graph/badge.svg)](https://app.codecov.io/gh/GohUnTsuan/regmonkey)
 <!-- badges: end -->
 
 The goal of `regmonkey` is to quickly performing batch regression on different variable combinations and different regression models, specifying necessary variables, significance levels, and directions. And output significant models after regression.
