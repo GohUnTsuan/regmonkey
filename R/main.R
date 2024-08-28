@@ -33,7 +33,36 @@ perform_regression <- function(data, formula, independent_var, significance_leve
     stop("Invalid direction specified. Use 'both', 'positive', or 'negative'.")
   }
 }
-
+#' RegMonkey: Automated Regression Analysis
+#'
+#' This function performs automated regression analysis by iterating over possible
+#' combinations of control variables, with or without mandatory variables. It assesses
+#' the significance of independent variables' effects on a dependent variable.
+#'
+#' @param data A data frame containing the variables referenced in the formula.
+#' @param dependent_var A string specifying the name of the dependent variable.
+#' @param independent_vars A character vector specifying the names of independent variables
+#'                         to be tested in the model.
+#' @param control_vars An optional character vector of control variables that may be included
+#'                     in the model. Default is NULL.
+#' @param mandatory_vars An optional character vector of variables that must always be included
+#'                       as controls in every model tested. Default is NULL.
+#' @param significance_level A numeric value specifying the significance level for the
+#'                           hypothesis test of the coefficients. Default is 0.05.
+#' @param direction A string indicating the direction of the effect to test: 'both' for both
+#'                  positive and negative, 'positive' only for positive, and 'negative' only
+#'                  for negative effects. Default is 'both'.
+#'
+#' @return A list of significant combinations. Each element of the list is itself a list
+#'         containing the independent variable and the controls under which it was found
+#'         significant.
+#'
+#' @examples
+#' data <- data.frame(y = rnorm(100), x1 = rnorm(100), x2 = rnorm(100), x3 = rnorm(100))
+#' significant_results <- regmonkey(data, "y", c("x1", "x2"), control_vars = c("x3"))
+#'
+#' @export
+#'
 regmonkey <- function(data, dependent_var, independent_vars, control_vars = NULL, mandatory_vars = NULL, significance_level = 0.05, direction = "both") {
   control_combinations <- generate_combinations(control_vars, mandatory_vars)
   significant_combinations <- list()
