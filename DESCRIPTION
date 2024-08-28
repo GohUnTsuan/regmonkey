@@ -1,6 +1,6 @@
 Package: regmonkey
 Title: Quickly perform regression on different variable combinations
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R: 
     person("Wenquan", "Wu", , "gohuntsusan@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-9354-2313"))
