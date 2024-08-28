@@ -5,3 +5,5 @@
 ^regmonkey\.Rproj$
 ^LICENSE\.md$
 ^\.github$
+^codecov\.yml$
+^README\.Rmd$
