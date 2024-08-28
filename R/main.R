@@ -1,3 +1,4 @@
+#' @importFrom utils combn
 generate_combinations <- function(control_vars, mandatory_vars = NULL) {
   if (!is.null(mandatory_vars)) {
     control_vars <- setdiff(control_vars, mandatory_vars)
@@ -6,7 +7,7 @@ generate_combinations <- function(control_vars, mandatory_vars = NULL) {
     combn(control_vars, i, simplify = FALSE)
   }), recursive = FALSE)
 }
-
+#' @importFrom stats as.formula lm
 create_formula <- function(dependent_var, independent_var, controls) {
   as.formula(paste(dependent_var, "~", paste(c(independent_var, controls), collapse = " + ")))
 }
