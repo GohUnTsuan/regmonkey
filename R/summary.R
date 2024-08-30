@@ -1,5 +1,3 @@
-
-
 #' Summarize and Display Regression Results
 #'
 #' This function processes the results from the `regmonkey` function, creating and displaying regression models for each significant variable combination identified. It utilizes the `modelsummary` package to format and present these results clearly, allowing for an easy evaluation of the significance and impact of various predictors.
@@ -23,34 +21,29 @@
 #' data <- data.frame(y = y, x1 = x1, x2 = x2, x3 = x3)
 #' significant_results <- regmonkey(data, "y", c("x1", "x2"), control_vars = c("x3"))
 #' summary_reg(significant_results, data)
-summary_reg <- function(significant_results, data) {
+summary_reg <- function(significant_results, data, coef_map_override = NULL) {
   models <- list()
   model_names <- list()
 
   for (i in seq_along(significant_results)) {
     controls <- significant_results[[i]]$controls
-    if (length(controls) == 0) {
-      # No controls specified
-      formula <- as.formula(paste(significant_results[[i]]$dependent_var, "~", significant_results[[i]]$independent_var))
-
-      } else {
-      # Controls are specified
-      formula <- as.formula(paste(
-        significant_results[[i]]$dependent_var,
-        "~",
-        paste(c(significant_results[[i]]$independent_var, controls), collapse = " + ")
-      ))
-      }
-
+    formula <- if (length(controls) == 0) {
+      as.formula(paste(significant_results[[i]]$dependent_var, "~", significant_results[[i]]$independent_var))
+    } else {
+      as.formula(paste(significant_results[[i]]$dependent_var, "~", paste(c(significant_results[[i]]$independent_var, controls), collapse = " + ")))
+    }
 
     model <- lm(formula, data = data)
     models[[i]] <- model
     model_names[[i]] <- paste("Model", i, ":", significant_results[[i]]$independent_var, "with", paste(controls, collapse = ", "))
   }
 
-  # Use modelsummary if installed or just show summaries
   if ("modelsummary" %in% rownames(installed.packages())) {
-    modelsummary::modelsummary(models, stars = TRUE)
+    if (is.null(coef_map_override)) {
+      modelsummary(models, stars = TRUE)
+    } else {
+      modelsummary(models, coef_map = coef_map_override, stars = TRUE)
+    }
   } else {
     lapply(models, summary)
   }

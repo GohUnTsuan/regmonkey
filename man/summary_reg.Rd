@@ -4,7 +4,7 @@
 \alias{summary_reg}
 \title{Summarize and Display Regression Results}
 \usage{
-summary_reg(significant_results, data)
+summary_reg(significant_results, data, coef_map_override = NULL)
 }
 \arguments{
 \item{significant_results}{A list of significant variable combinations returned by \code{regmonkey}. Each element of the list should contain the dependent variable, the independent variable, and the controls under which the significant result was found.}
