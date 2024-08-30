@@ -4,7 +4,7 @@
 \alias{summary_reg}
 \title{Summarize and Display Regression Results}
 \usage{
-summary_reg(significant_results, data, coef_map_override = NULL)
+summary_reg(significant_results, data)
 }
 \arguments{
 \item{significant_results}{A list of significant variable combinations returned by \code{regmonkey}. Each element of the list should contain the dependent variable, the independent variable, and the controls under which the significant result was found.}
@@ -21,7 +21,11 @@ This function processes the results from the \code{regmonkey} function, creating
 }
 \examples{
 # Assuming `regmonkey` has been run and stored results in `monkey_results`
-data <- data.frame(y = rnorm(100), x1 = rnorm(100), x2 = rnorm(100), x3 = rnorm(100))
+x1 <- rnorm(100, mean = 0, sd = 1)
+x2 <- rnorm(100, mean = 0, sd = 1)
+x3 <- rnorm(100, mean = 0, sd = 1)
+y <- 2 + 1.5 * x1 - 2 * x2 + 0.5 * x3 + rnorm(100, mean = 0, sd = 1)
+data <- data.frame(y = y, x1 = x1, x2 = x2, x3 = x3)
 significant_results <- regmonkey(data, "y", c("x1", "x2"), control_vars = c("x3"))
 summary_reg(significant_results, data)
 }
