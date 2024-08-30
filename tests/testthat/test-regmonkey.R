@@ -10,10 +10,12 @@ test_that("regmonkey function output matches expected results", {
 
   expect_results <- list(
     list(
+      dependent_var = "mpg",
       independent_var = "cyl",
       controls = character(0)
     ),
     list(
+      dependent_var = "mpg",
       independent_var = "cyl",
       controls = c("am")
     )

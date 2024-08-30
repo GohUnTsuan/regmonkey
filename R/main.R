@@ -79,7 +79,7 @@ regmonkey <- function(data, dependent_var, independent_vars, control_vars = NULL
       significant <- perform_regression(data, formula, independent_var, significance_level, direction)
 
       if (significant) {
-        significant_combinations[[length(significant_combinations) + 1]] <- list(independent_var = independent_var, controls = controls)
+        significant_combinations[[length(significant_combinations) + 1]] <- list(dependent_var = dependent_var, independent_var = independent_var, controls = controls)
       }
     }
   }
